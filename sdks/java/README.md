@@ -3,10 +3,10 @@
 Thin Java wrapper over the `b4n1-db` standalone binary. All storage, SQL,
 graph, vector and audit logic lives in the binary; this library only invokes it.
 
-> **Distribution status:** the source ships in the crate and builds locally with
-> Maven; **no artifact is published to Maven Central** — that channel is blocked
-> by the organization quota (AGENTS.md §11.29, task `90b3ad6b`). The jar travels
-> inside the product bundle delivered to evaluated clients.
+> **Distribution status:** the source ships in the repository and builds locally
+> with Maven; **no artifact is published to Maven Central** — that channel is
+> blocked by the organization quota (AGENTS.md §11.29, task `90b3ad6b`). The jar
+> travels inside the product bundle delivered to evaluated clients.
 
 ## Build
 
