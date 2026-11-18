@@ -1,3 +1,9 @@
+<div align="center">
+
+<img src="../b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
+
+</div>
+
 # b4n1-db
 
 **Couche de données souveraine embarquée pour l'écosystème B4N1.** Un seul handle

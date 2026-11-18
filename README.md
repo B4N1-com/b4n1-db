@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
+
 # 🗄️ b4n1-db
 
 **The sovereign embedded data layer. One handle, eight engines — Python, Node.js, Ruby, PHP, Java, .NET and Go.** KV, SQL, graph, documents, queues, vectors and a Merkle-DAG audit log in one local, dependency-free core. No daemon, no network, no external database.

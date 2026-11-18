@@ -1,3 +1,9 @@
+<div align="center">
+
+<img src="../b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
+
+</div>
+
 # b4n1-db
 
 **B4N1 पारिस्थितिकी तंत्र के लिए संप्रभु एम्बेडेड डेटा परत।** एक ही हैंडल
