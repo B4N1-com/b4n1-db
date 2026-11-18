@@ -1,0 +1,7 @@
+# Never commit Rust source to the public mirror (§10h)
+*.rs
+Cargo.toml
+Cargo.lock
+*.ld
+.env
+*.pem
