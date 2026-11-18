@@ -7,7 +7,7 @@ order: ``B4N1_DB_BIN``, the copy bundled in this wheel (``bin/``), then
 compiler and no extra download.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import os
 import shutil

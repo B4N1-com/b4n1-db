@@ -18,5 +18,5 @@ export declare class DB {
   demo(): string;
 }
 
-/** SDK version, always equal to the crate version (0.1.0). */
+/** SDK version, always equal to the crate version (0.1.1). */
 export declare const SDK_VERSION: string;

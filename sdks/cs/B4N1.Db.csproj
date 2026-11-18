@@ -8,7 +8,7 @@
     <AssemblyName>B4N1.Db</AssemblyName>
 
     <PackageId>B4n1.Db</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Bani Montoya</Authors>
     <Description>b4n1-db SDK for .NET - sovereign embedded database over the b4n1-db binary</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>

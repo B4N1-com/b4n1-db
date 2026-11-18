@@ -12,7 +12,7 @@ namespace B4n1\Db;
  */
 final class Db
 {
-    public const VERSION = '0.1.0';
+    public const VERSION = '0.1.1';
 
     private string $path;
 

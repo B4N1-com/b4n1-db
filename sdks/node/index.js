@@ -11,7 +11,7 @@ const { execFileSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const SDK_VERSION = "0.1.0";
+const SDK_VERSION = "0.1.1";
 
 const PLATFORM_BINARIES = {
   "linux-x64": "b4n1-db-linux-amd64",
