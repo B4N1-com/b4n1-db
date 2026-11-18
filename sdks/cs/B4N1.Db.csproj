@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>B4n1.Db</RootNamespace>
+    <AssemblyName>B4N1.Db</AssemblyName>
+
+    <PackageId>B4n1.Db</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Bani Montoya</Authors>
+    <Description>b4n1-db SDK for .NET - sovereign embedded database over the b4n1-db binary</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://b4n1.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/B4N1-com/b4n1-db</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
+    <None Include="EULA.txt" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- The engine binary travel with the package (§10m: one binary, N wrappers).
+       `native/` and not `bin/` because `bin/` is dotnet's build output.
+       PackageCopyToOutput puts it next to the consumer's assembly; packaging it
+       from this project also copies it for a plain ProjectReference, which is
+       what the smoke test exercises. -->
+  <ItemGroup>
+    <None Include="native/**/*" Pack="true"
+          PackagePath="contentFiles/any/any/native/"
+          PackageCopyToOutput="true"
+          CopyToOutputDirectory="PreserveNewest"
+          Visible="false" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+{
+  "name": "b4n1/b4n1-db",
+  "description": "b4n1-db SDK for PHP - sovereign embedded database over the b4n1-db binary",
+  "type": "library",
+  "license": "BUSL-1.1",
+  "version": "0.1.0",
+  "homepage": "https://b4n1.com",
+  "require": {
+    "php": ">=8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "B4n1\\Db\\": "src/"
+    }
+  },
+  "files": [
+    "LICENSE",
+    "EULA.txt"
+  ]
+}

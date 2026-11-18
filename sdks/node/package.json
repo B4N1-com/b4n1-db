@@ -1,0 +1,32 @@
+{
+  "name": "b4n1-db",
+  "version": "0.1.0",
+  "description": "b4n1-db SDK for Node.js - sovereign embedded database (KV, SQL, audit DAG, documents, graph, queues, vectors)",
+  "license": "BUSL-1.1",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "bin",
+    "README.md",
+    "LICENSE",
+    "EULA.txt"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node --test test/basic.test.js"
+  },
+  "keywords": [
+    "database",
+    "embedded",
+    "sovereign",
+    "sql",
+    "key-value",
+    "vectors",
+    "merkle"
+  ],
+  "homepage": "https://b4n1.com"
+}
