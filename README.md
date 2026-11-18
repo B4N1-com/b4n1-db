@@ -1,13 +1,26 @@
-# b4n1-db
+<div align="center">
 
-**Sovereign embedded data layer for the B4N1 ecosystem.** One handle (`SovereignDB`)
-over eight local storage engines — no client/server database, no network engine,
-no daemon, no external dependencies.
+# 🗄️ b4n1-db
+
+**The sovereign embedded data layer. One handle, eight engines — Python, Node.js, Ruby, PHP, Java, .NET and Go.** KV, SQL, graph, documents, queues, vectors and a Merkle-DAG audit log in one local, dependency-free core. No daemon, no network, no external database.
+
+[![License](https://img.shields.io/badge/license-BUSL--1.1-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/b4n1-db.svg)](https://pypi.org/project/b4n1-db/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/b4n1-db.svg)](https://pypi.org/project/b4n1-db/)
+[![Pepy downloads](https://img.shields.io/pepy/dt/b4n1-db.svg)](https://pepy.tech/project/b4n1-db)
+[![npm](https://img.shields.io/npm/v/b4n1-db.svg)](https://www.npmjs.com/package/b4n1-db)
+[![npm downloads](https://img.shields.io/npm/dm/b4n1-db.svg)](https://www.npmjs.com/package/b4n1-db)
+[![NuGet](https://img.shields.io/nuget/v/B4n1.Db.svg)](https://www.nuget.org/packages/B4n1.Db)
+[![NuGet downloads](https://img.shields.io/nuget/dt/B4n1.Db.svg)](https://www.nuget.org/packages/B4n1.Db)
+[![RubyGems](https://img.shields.io/gem/v/b4n1-db.svg)](https://rubygems.org/gems/b4n1-db)
+[![Packagist](https://img.shields.io/packagist/v/b4n1/b4n1-db.svg)](https://packagist.org/packages/b4n1/b4n1-db)
+[![Go Reference](https://pkg.go.dev/badge/github.com/B4N1-com/b4n1-db/sdks/go.svg)](https://pkg.go.dev/github.com/B4N1-com/b4n1-db/sdks/go)
+
+</div>
 
 > **Status: library + standalone binary.** Ships a native library AND a standalone
 > `b4n1-db` CLI (KV, SQL, graph, documents, queues, vectors, audit, migrations,
-> transfer, plus an offline `demo` and `docs`). No MCP server. Published SDKs:
-> PyPI, npm, NuGet, RubyGems, Packagist and Go modules (see `sdks/`).
+> transfer, plus an offline `demo` and `docs`). No MCP server.
 
 **Languages:** [العربية](i18n/README.ar.md) · [Deutsch](i18n/README.de.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [हिन्दी](i18n/README.hi.md) · [Italiano](i18n/README.it.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Português (BR)](i18n/README.pt-BR.md) · [Русский](i18n/README.ru.md) · [中文](i18n/README.zh-CN.md)
 
@@ -20,7 +33,6 @@ no daemon, no external dependencies.
 - [Quick start](#quick-start)
 - [Subsystems](#subsystems)
 - [SDKs](#sdks)
-- [Testing](#testing)
 - [License](#license)
 
 ---
@@ -139,17 +151,6 @@ the native binary and resolves it in this order:
 | PHP | `sdks/php/` | Packagist: `b4n1/b4n1-db` |
 | Go | `sdks/go/` | Go modules |
 | Java | `sdks/java/` | (Maven pending) |
-
-## Testing
-
-The project ships a full test suite: unit, integration, feature-cut guards and
-per-SDK contract tests. Every published SDK is contract-tested against the
-real binary before release.
-
-```bash
-# Run the embedded SDK contract suite
-bash cli.sh test b4n1-db-embedded
-```
 
 ## License
 
