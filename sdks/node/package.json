@@ -1,6 +1,6 @@
 {
   "name": "b4n1-db",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "b4n1-db SDK for Node.js - sovereign embedded database (KV, SQL, audit DAG, documents, graph, queues, vectors)",
   "license": "BUSL-1.1",
   "main": "index.js",

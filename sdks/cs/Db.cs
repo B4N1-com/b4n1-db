@@ -12,7 +12,7 @@ namespace B4n1.Db
     /// </summary>
     public sealed class Database
     {
-        public const string Version = "0.1.2";
+        public const string Version = "0.1.3";
 
         private const int TimeoutMs = 60000;
 
