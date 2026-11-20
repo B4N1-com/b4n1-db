@@ -20,16 +20,42 @@ require 'vendor/autoload.php';
 use B4n1\Db\Db;
 
 $db = new Db('./data');
-$db->put('greeting', 'hello');
-var_dump($db->get('greeting'));   // ['key' => 'greeting', 'value' => 'hello']
-var_dump($db->stats()['kv_entries']); // 1
-echo $db->demo();
+
+$db->kv()->put('greeting', 'hello');
+var_dump($db->kv()->get('greeting'));      // ['key' => 'greeting', 'value' => 'hello']
+
+$db->sql()->execute('CREATE TABLE u (id BIGINT, name VARCHAR)');
+$db->sql()->execute("INSERT INTO u VALUES (1, 'ada')");
+var_dump($db->sql()->query('SELECT name FROM u'));
+
+var_dump($db->graph()->addNode('pattern', 'ada'));   // ['ok' => true, 'id' => '…']
+$db->doc()->insert('notes', ['text' => 'first']);
+$db->queue()->push('jobs', 'build');
+$db->audit()->verify();
 ```
+
+## Engines
+
+| Group | Methods |
+|---|---|
+| `kv()` | put, get, delete, scan, putTtl, ttl, purgeExpired |
+| `sql()` | execute, query, tables, registerCsv, registerJson, registerParquet, drop |
+| `graph()` | addNode, addRelation, node, search, forget |
+| `doc()` | insert, findOne, find, findByField, update, delete |
+| `queue()` | push, pop, peek, ack, nack, clear, len |
+| `vector()` | insert, search, delete, list |
+| `audit()` | verify, history, latest, timeTravel, rootHash |
+| `migration()` | list, add, apply, exec, rollback |
+| `transfer()` | backup, restore, export, import |
+
+Vectors use the database dimension (1536 by default). Graph node types are
+`instruction`, `intention`, `contract`, `pattern`, `scaffold`, `qapair` and
+`cyclerecord`.
 
 ## Test
 
 ```bash
-B4N1_DB_BIN=/path/to/b4n1-db php -r 'require "src/Db.php"; $d = new B4n1\Db\Db(sys_get_temp_dir()."/b4n1-php"); $d->put("a","1"); var_dump($d->get("a"));'
+B4N1_DB_BIN=/path/to/b4n1-db php tests/surface_test.php
 ```
 
 ## License

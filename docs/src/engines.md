@@ -1,7 +1,13 @@
 # The Eight Engines
 
-One store, eight surfaces, all reachable from the same handle and the same
-command.
+One store, eight storage engines, all reachable from the same handle and the
+same command. A ninth group, **transfer**, moves the whole directory in and out
+and is covered at the end of this chapter.
+
+Every engine is one group in every SDK: `db.kv`, `db.sql`, `db.graph`,
+`db.doc`, `db.queue`, `db.vector`, `db.audit`, `db.migration`, `db.transfer`.
+The [SDKs](sdks.md) chapter lists the fifty methods with their names per
+language.
 
 | Engine | What it gives you | What it does not |
 |---|---|---|
@@ -27,8 +33,9 @@ b4n1-db kv scan user:
 b4n1-db kv purge-expired
 ```
 
-From Python: `db.kv_put("k", "v")` and `db.kv_get("k")`. A value that is not
-valid UTF-8 comes back base64-encoded.
+From Python: `db.kv.put("k", "v")` and `db.kv.get("k")` (`db.kv_put` /
+`db.kv_get` remain as aliases). A value that is not valid UTF-8 comes back
+base64-encoded.
 
 ## SQL
 
@@ -80,10 +87,16 @@ b4n1-db queue len jobs
 Cosine similarity with metadata filtering. Vectors are JSON arrays of numbers; a
 filter is a JSON object of required pairs.
 
+The index has **one dimension per database, 1536 by default**. A vector of any
+other length is refused (`Vector dimension mismatch`) instead of being padded,
+so the command is the same for every record:
+
 ```bash
-b4n1-db vec insert docs '[0.1, 0.2, 0.3]' '{"lang":"en"}'
-b4n1-db vec search docs '[0.1, 0.2, 0.3]' 5 '{"lang":"en"}'
-b4n1-db vec delete docs <id>
+# a 1536-float array, abridged here
+b4n1-db vector insert docs '[0.1, 0.2, …, 0.0]' '{"lang":"en"}'
+b4n1-db vector search docs '[0.1, 0.2, …, 0.0]' 5 '{"lang":"en"}'
+b4n1-db vector list docs
+b4n1-db vector delete docs <id>
 ```
 
 ## Audit
@@ -106,6 +119,10 @@ A versioned registry with a checksum per step. `apply` registers versions
 **without** running DDL; `exec` runs them for real and rolls the whole batch
 back on failure. The separation exists so a deploy can record intent and a
 separate step can act on it.
+
+The registry lives on disk, so `add` in one invocation is visible to `exec` in
+the next; re-registering a version is refused rather than silently replacing an
+applied step's `up_sql`.
 
 ```bash
 b4n1-db migration add 1 create-users "CREATE TABLE users (id INTEGER PRIMARY KEY)"

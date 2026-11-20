@@ -12,7 +12,7 @@ import (
 )
 
 // Version is the SDK version and tracks the crate version.
-const Version = "0.1.1"
+const Version = "0.1.2"
 
 // Stats mirrors the JSON emitted by `b4n1-db --json stats`.
 type Stats struct {
@@ -27,9 +27,21 @@ type Entry struct {
 	Value string `json:"value"`
 }
 
-// DB is a handle to a database directory.
+// DB is a handle to a database directory. Each engine is a field, one per
+// module of the binary: db.KV, db.SQL, db.Graph, db.Doc, db.Queue, db.Vector,
+// db.Audit, db.Migration, db.Transfer.
 type DB struct {
 	Path string
+
+	KV        KV
+	SQL       SQL
+	Graph     Graph
+	Doc       Doc
+	Queue     Queue
+	Vector    Vector
+	Audit     Audit
+	Migration Migration
+	Transfer  Transfer
 }
 
 // New opens (creates on demand) the database at path.
@@ -37,7 +49,17 @@ func New(path string) *DB {
 	if path == "" {
 		path = "./data"
 	}
-	return &DB{Path: path}
+	db := &DB{Path: path}
+	db.KV = KV{db}
+	db.SQL = SQL{db}
+	db.Graph = Graph{db}
+	db.Doc = Doc{db}
+	db.Queue = Queue{db}
+	db.Vector = Vector{db}
+	db.Audit = Audit{db}
+	db.Migration = Migration{db}
+	db.Transfer = Transfer{db}
+	return db
 }
 
 // Binary resolves the b4n1-db binary: B4N1_DB_BIN, then PATH.

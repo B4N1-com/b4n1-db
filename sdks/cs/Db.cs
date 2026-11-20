@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using B4n1.Db.Engines;
 
 namespace B4n1.Db
 {
@@ -11,7 +12,7 @@ namespace B4n1.Db
     /// </summary>
     public sealed class Database
     {
-        public const string Version = "0.1.1";
+        public const string Version = "0.1.2";
 
         private const int TimeoutMs = 60000;
 
@@ -20,7 +21,49 @@ namespace B4n1.Db
         public Database(string path = "./data")
         {
             _path = path;
+            Kv = new KvEngine(this);
+            Sql = new SqlEngine(this);
+            Graph = new GraphEngine(this);
+            Doc = new DocEngine(this);
+            Queue = new QueueEngine(this);
+            Vector = new VectorEngine(this);
+            Audit = new AuditEngine(this);
+            Migration = new MigrationEngine(this);
+            Transfer = new TransferEngine(this);
         }
+
+        /// <summary>Key-value engine.</summary>
+        public KvEngine Kv { get; }
+
+        /// <summary>Analytical SQL engine.</summary>
+        public SqlEngine Sql { get; }
+
+        /// <summary>Knowledge graph engine.</summary>
+        public GraphEngine Graph { get; }
+
+        /// <summary>Document collections.</summary>
+        public DocEngine Doc { get; }
+
+        /// <summary>FIFO queues with ack/nack.</summary>
+        public QueueEngine Queue { get; }
+
+        /// <summary>Vector index with cosine similarity.</summary>
+        public VectorEngine Vector { get; }
+
+        /// <summary>Merkle-DAG audit log.</summary>
+        public AuditEngine Audit { get; }
+
+        /// <summary>Schema migration registry.</summary>
+        public MigrationEngine Migration { get; }
+
+        /// <summary>Backup, restore and JSON transfer.</summary>
+        public TransferEngine Transfer { get; }
+
+        /// <summary>
+        /// Runs a verb with <c>--json</c> and returns its answer as text. The
+        /// engine groups call this; consumers never need to.
+        /// </summary>
+        public string Invoke(params string[] args) => Run(true, args);
 
         /// <summary>
         /// Platform → file name inside the package's <c>native/</c> dir. Must
@@ -114,11 +157,11 @@ namespace B4n1.Db
         /// <summary>Database counters as JSON.</summary>
         public string Stats() => Run(true, "stats");
 
-        /// <summary>Writes a key/value pair.</summary>
-        public void Put(string key, string value) => Run(false, "kv", "put", key, value);
+        /// <summary>Writes a key/value pair (alias of <c>Kv.Put</c>).</summary>
+        public void Put(string key, string value) => Kv.Put(key, value);
 
-        /// <summary>Reads a key; returns the entry as JSON.</summary>
-        public string Get(string key) => Run(true, "kv", "get", key);
+        /// <summary>Reads a key (alias of <c>Kv.Get</c>).</summary>
+        public string Get(string key) => Kv.Get(key);
 
         /// <summary>Runs the offline one-click demonstration and returns its transcript.</summary>
         public string Demo() => Run(false, "demo");

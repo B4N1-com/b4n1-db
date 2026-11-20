@@ -8,7 +8,7 @@
     <AssemblyName>B4N1.Db</AssemblyName>
 
     <PackageId>B4n1.Db</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Authors>Bani Montoya</Authors>
     <Description>b4n1-db SDK for .NET - sovereign embedded database over the b4n1-db binary</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -16,6 +16,19 @@
     <RepositoryUrl>https://github.com/B4N1-com/b4n1-db</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <!-- The smoke runner is its own project: a Main() inside this glob would be
+       compiled into the netstandard library we publish. -->
+  <ItemGroup>
+    <Compile Remove="tests/**/*.cs" />
+    <None Remove="tests/**/*" />
+  </ItemGroup>
+
+  <!-- System.Text.Json ships with .NET 8 but not with netstandard2.1, so the
+       netstandard target needs the NuGet package; net8.0 already has it. -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />

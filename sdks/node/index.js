@@ -11,7 +11,9 @@ const { execFileSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const SDK_VERSION = "0.1.1";
+const { attachEngines } = require("./engines");
+
+const SDK_VERSION = "0.1.2";
 
 const PLATFORM_BINARIES = {
   "linux-x64": "b4n1-db-linux-amd64",
@@ -45,6 +47,7 @@ function findBinary() {
 class DB {
   constructor(dbPath = "./data") {
     this.path = dbPath;
+    Object.assign(this, attachEngines(this));
   }
 
   _run(args, jsonOut = true) {
@@ -63,12 +66,14 @@ class DB {
     return this._run(["stats"]);
   }
 
+  /** Alias of `db.kv.put(...)`, kept from 0.1. */
   kvPut(key, value) {
-    return this._run(["kv", "put", key, String(value)], false);
+    return this.kv.put(key, value);
   }
 
+  /** Alias of `db.kv.get(...)`, kept from 0.1. */
   kvGet(key) {
-    return this._run(["kv", "get", key]);
+    return this.kv.get(key);
   }
 
   demo() {

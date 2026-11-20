@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public final class B4n1Db {
 
-    public static final String VERSION = "0.1.1";
+    public static final String VERSION = "0.1.2";
 
     private static final long TIMEOUT_SECONDS = 60;
 
@@ -29,6 +29,79 @@ public final class B4n1Db {
 
     public B4n1Db(String path) {
         this.path = path;
+        this.kv = new Kv(this);
+        this.sql = new Sql(this);
+        this.graph = new Graph(this);
+        this.doc = new Doc(this);
+        this.queue = new Queue(this);
+        this.vector = new Vector(this);
+        this.audit = new Audit(this);
+        this.migration = new Migration(this);
+        this.transfer = new Transfer(this);
+    }
+
+    private final Kv kv;
+    private final Sql sql;
+    private final Graph graph;
+    private final Doc doc;
+    private final Queue queue;
+    private final Vector vector;
+    private final Audit audit;
+    private final Migration migration;
+    private final Transfer transfer;
+
+    /** Key-value engine. */
+    public Kv kv() {
+        return kv;
+    }
+
+    /** Analytical SQL engine. */
+    public Sql sql() {
+        return sql;
+    }
+
+    /** Knowledge graph engine. */
+    public Graph graph() {
+        return graph;
+    }
+
+    /** Document collections. */
+    public Doc doc() {
+        return doc;
+    }
+
+    /** FIFO queues with ack/nack. */
+    public Queue queue() {
+        return queue;
+    }
+
+    /** Vector index with cosine similarity. */
+    public Vector vector() {
+        return vector;
+    }
+
+    /** Merkle-DAG audit log. */
+    public Audit audit() {
+        return audit;
+    }
+
+    /** Schema migration registry. */
+    public Migration migration() {
+        return migration;
+    }
+
+    /** Backup, restore and JSON transfer. */
+    public Transfer transfer() {
+        return transfer;
+    }
+
+    /**
+     * Runs a verb with {@code --json} and returns its answer as text.
+     *
+     * <p>The engine groups call this; consumers never need to.
+     */
+    public String invoke(String... args) throws IOException {
+        return run(true, args);
     }
 
     /** Resolves the binary: {@code B4N1_DB_BIN}, then {@code PATH}. */
@@ -55,14 +128,14 @@ public final class B4n1Db {
         return run(true, "stats");
     }
 
-    /** Writes a key/value pair. */
+    /** Writes a key/value pair (alias of {@code kv().put}). */
     public void put(String key, String value) throws IOException {
-        run(false, "kv", "put", key, value);
+        kv.put(key, value);
     }
 
-    /** Reads a key; returns the entry as JSON. */
+    /** Reads a key (alias of {@code kv().get}); returns the entry as JSON. */
     public String get(String key) throws IOException {
-        return run(true, "kv", "get", key);
+        return kv.get(key);
     }
 
     /** Runs the offline one-click demonstration and returns its transcript. */

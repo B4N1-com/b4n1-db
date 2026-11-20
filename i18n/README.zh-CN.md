@@ -1,9 +1,3 @@
-<div align="center">
-
-<img src="../b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
-
-</div>
-
 # b4n1-db
 
 **B4N1 生态系统的自主嵌入式数据层。** 一个句柄（`SovereignDB`）即可驾驭八个本地

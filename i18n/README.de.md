@@ -1,9 +1,3 @@
-<div align="center">
-
-<img src="../b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
-
-</div>
-
 # b4n1-db
 
 **Soberane eingebettete Datenschicht für das B4N1-Ökosystem.** Ein einziges Handle

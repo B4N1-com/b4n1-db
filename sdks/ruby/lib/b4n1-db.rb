@@ -6,8 +6,10 @@
 require "json"
 require "open3"
 
+require_relative "b4n1db/engines"
+
 module B4n1Db
-  VERSION = "0.1.1"
+  VERSION = "0.1.2"
 
   class Error < StandardError; end
   class BinaryNotFound < Error; end
@@ -44,27 +46,43 @@ module B4n1Db
 
   # Handle to a database directory.
   class DB
-    attr_reader :path
+    attr_reader :path, :kv, :sql, :graph, :doc, :queue, :vector, :audit, :migration, :transfer
 
     def initialize(path = "./data")
       @path = path
+      @kv = Kv.new(self)
+      @sql = Sql.new(self)
+      @graph = Graph.new(self)
+      @doc = Doc.new(self)
+      @queue = Queue.new(self)
+      @vector = Vector.new(self)
+      @audit = Audit.new(self)
+      @migration = Migration.new(self)
+      @transfer = Transfer.new(self)
     end
 
     def stats
-      JSON.parse(run(true, "stats"))
+      JSON.parse(invoke("stats"))
     end
 
+    # Alias of `db.kv.put(...)`, kept from 0.1.
     def put(key, value)
-      run(false, "kv", "put", key, value.to_s)
+      @kv.put(key, value)
       true
     end
 
+    # Alias of `db.kv.get(...)`, kept from 0.1.
     def get(key)
-      JSON.parse(run(true, "kv", "get", key))
+      @kv.get(key)
     end
 
     def demo
       run(false, "demo")
+    end
+
+    # Run a verb and return its `--json` answer as text (engines parse it).
+    def invoke(*args)
+      run(true, *args)
     end
 
     private

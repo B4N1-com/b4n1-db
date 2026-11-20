@@ -1,9 +1,3 @@
-<div align="center">
-
-<img src="../b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
-
-</div>
-
 # b4n1-db
 
 **B4N1 생태계를 위한 소버린 임베디드 데이터 계층.** 단일 핸들(`SovereignDB`)로

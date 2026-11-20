@@ -1,9 +1,3 @@
-<div align="center">
-
-<img src="../b4n1db_presentation.png" alt="B4N1 DB — Sovereign Data Future" width="100%">
-
-</div>
-
 # b4n1-db
 
 **Camada de dados soberana embarcada para o ecossistema B4N1.** Um único handle

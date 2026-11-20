@@ -4,21 +4,99 @@ declare(strict_types=1);
 
 namespace B4n1\Db;
 
+use B4n1\Db\Engines\Audit;
+use B4n1\Db\Engines\Doc;
+use B4n1\Db\Engines\Graph;
+use B4n1\Db\Engines\Kv;
+use B4n1\Db\Engines\Migration;
+use B4n1\Db\Engines\Queue;
+use B4n1\Db\Engines\Sql;
+use B4n1\Db\Engines\Transfer;
+use B4n1\Db\Engines\Vector;
+
 /**
  * Thin PHP wrapper over the `b4n1-db` standalone binary.
  *
  * All storage, SQL, graph, vector and audit logic lives in the binary; this
- * class only invokes it.
+ * class only invokes it. Each engine is a group: `$db->kv()`, `$db->sql()`,
+ * `$db->graph()`, `$db->doc()`, `$db->queue()`, `$db->vector()`, `$db->audit()`,
+ * `$db->migration()`, `$db->transfer()`.
  */
 final class Db
 {
-    public const VERSION = '0.1.1';
+    public const VERSION = '0.1.2';
 
     private string $path;
+
+    private ?Kv $kv = null;
+    private ?Sql $sql = null;
+    private ?Graph $graph = null;
+    private ?Doc $doc = null;
+    private ?Queue $queue = null;
+    private ?Vector $vector = null;
+    private ?Audit $audit = null;
+    private ?Migration $migration = null;
+    private ?Transfer $transfer = null;
 
     public function __construct(string $path = './data')
     {
         $this->path = $path;
+    }
+
+    public function kv(): Kv
+    {
+        return $this->kv ??= new Kv($this);
+    }
+
+    public function sql(): Sql
+    {
+        return $this->sql ??= new Sql($this);
+    }
+
+    public function graph(): Graph
+    {
+        return $this->graph ??= new Graph($this);
+    }
+
+    public function doc(): Doc
+    {
+        return $this->doc ??= new Doc($this);
+    }
+
+    public function queue(): Queue
+    {
+        return $this->queue ??= new Queue($this);
+    }
+
+    public function vector(): Vector
+    {
+        return $this->vector ??= new Vector($this);
+    }
+
+    public function audit(): Audit
+    {
+        return $this->audit ??= new Audit($this);
+    }
+
+    public function migration(): Migration
+    {
+        return $this->migration ??= new Migration($this);
+    }
+
+    public function transfer(): Transfer
+    {
+        return $this->transfer ??= new Transfer($this);
+    }
+
+    /**
+     * Run a verb and return its `--json` answer (the engine groups use this).
+     *
+     * @param list<string> $args
+     * @return array<string,mixed>
+     */
+    public function invoke(array $args): array
+    {
+        return $this->decode($this->run(true, $args));
     }
 
     /** Resolves the binary: B4N1_DB_BIN, then PATH. */
@@ -45,17 +123,18 @@ final class Db
         return $this->decode($this->run(true, ['stats']));
     }
 
+    /** Alias of `$db->kv()->put(...)`, kept from 0.1. */
     public function put(string $key, string $value): bool
     {
-        $this->run(false, ['kv', 'put', $key, $value]);
+        $this->kv()->put($key, $value);
 
         return true;
     }
 
-    /** @return array<string,mixed> */
+    /** Alias of `$db->kv()->get(...)`, kept from 0.1. @return array<string,mixed> */
     public function get(string $key): array
     {
-        return $this->decode($this->run(true, ['kv', 'get', $key]));
+        return $this->kv()->get($key);
     }
 
     public function demo(): string
