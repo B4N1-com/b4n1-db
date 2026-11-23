@@ -8,8 +8,8 @@ License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
 Parameters
 
 Licensor:             B4N1 (b4n1.com)
-Licensed Work:        b4n1-boost — Python SDK and native acceleration
-                      libraries for Django, FastAPI, Flask, WSGI and ASGI.
+Licensed Work:        b4n1-db — Universal embedded database: key-value, SQL, document and
+                      graph stores with an auditable Merkle log.
 Additional Use Grant: You may use the Licensed Work in production, free of
                       charge, provided that your organization's total annual
                       gross revenue does not exceed USD $100,000. Organizations
