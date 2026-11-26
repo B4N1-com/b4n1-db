@@ -24,7 +24,7 @@ use B4n1\Db\Engines\Vector;
  */
 final class Db
 {
-    public const VERSION = '0.1.3';
+    public const VERSION = '0.1.4';
 
     private string $path;
 

@@ -13,7 +13,7 @@ const path = require("node:path");
 
 const { attachEngines } = require("./engines");
 
-const SDK_VERSION = "0.1.3";
+const SDK_VERSION = "0.1.4";
 
 const PLATFORM_BINARIES = {
   "linux-x64": "b4n1-db-linux-amd64",

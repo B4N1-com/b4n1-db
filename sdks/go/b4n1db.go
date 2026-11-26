@@ -12,7 +12,7 @@ import (
 )
 
 // Version is the SDK version and tracks the crate version.
-const Version = "0.1.3"
+const Version = "0.1.4"
 
 // Stats mirrors the JSON emitted by `b4n1-db --json stats`.
 type Stats struct {

@@ -9,7 +9,7 @@ require "open3"
 require_relative "b4n1db/engines"
 
 module B4n1Db
-  VERSION = "0.1.3"
+  VERSION = "0.1.4"
 
   class Error < StandardError; end
   class BinaryNotFound < Error; end

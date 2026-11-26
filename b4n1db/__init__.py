@@ -18,7 +18,7 @@ The full contract (9 engines, 50 methods) is `sdk-surface.tsv` in the crate
 root, and the suite fails when a wrapper drifts from it.
 """
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 import json
 import os

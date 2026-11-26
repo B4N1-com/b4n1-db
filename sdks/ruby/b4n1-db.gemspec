@@ -4,7 +4,7 @@ require_relative "lib/b4n1-db"
 
 Gem::Specification.new do |spec|
   spec.name          = "b4n1-db"
-  # Version mirror for the release bump: 0.1.3 (source of truth: B4n1Db::VERSION).
+  # Version mirror for the release bump: 0.1.4 (source of truth: B4n1Db::VERSION).
   spec.version       = B4n1Db::VERSION
   spec.authors       = ["Bani Montoya"]
   spec.summary       = "b4n1-db SDK — sovereign embedded database over the b4n1-db binary"

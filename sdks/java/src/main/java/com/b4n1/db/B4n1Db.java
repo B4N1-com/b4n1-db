@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public final class B4n1Db {
 
-    public static final String VERSION = "0.1.3";
+    public static final String VERSION = "0.1.4";
 
     private static final long TIMEOUT_SECONDS = 60;
 
